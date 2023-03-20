@@ -3,7 +3,7 @@
 // import viteLogo from '/vite.svg';
 import './App.css';
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, NavLink } from 'react-router-dom';
 
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
@@ -13,14 +13,17 @@ function App() {
   return (
     <>
       <header className="header">
+        <div className="thisPage">
+          This page: <span className="page"> Home</span>
+        </div>
         <nav className="nav">
-          <Link to="/" className="nav-item">
+          <NavLink to="/" className="nav-item">
             Home
-          </Link>
+          </NavLink>
 
-          <Link to="/about" className="nav-item">
+          <NavLink to="/about" className="nav-item">
             About us
-          </Link>
+          </NavLink>
         </nav>
       </header>
       <Routes>
