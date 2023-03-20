@@ -15,7 +15,7 @@ export class Search extends React.Component<Record<string, never>, SearchInfo> {
         <input
           defaultValue={this.state.searchText}
           onChange={this.handleInput}
-          type="search"
+          type="text"
           placeholder="Search"
           className="search"
         />
@@ -35,7 +35,6 @@ export class Search extends React.Component<Record<string, never>, SearchInfo> {
       this.setState({
         searchText: JSON.parse(JSON.stringify(localStorage.getItem('searchText'))),
       });
-    localStorage.setItem('searchText', this.state.searchText);
   }
 
   componentWillUnmount() {
