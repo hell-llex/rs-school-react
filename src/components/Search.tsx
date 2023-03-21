@@ -18,6 +18,7 @@ export class Search extends React.Component<Record<string, never>, SearchInfo> {
           type="text"
           placeholder="Search"
           className="search"
+          role="search"
         />
         <button type="submit" className="btn-search">
           Search

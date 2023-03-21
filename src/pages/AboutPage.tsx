@@ -4,8 +4,8 @@ import React from 'react';
 const AboutPage = () => {
   return (
     <div>
-      <Header title="About us" />
-      <h1>About us</h1>
+      <Header title="About Us" />
+      <h1>About Us</h1>
     </div>
   );
 };
