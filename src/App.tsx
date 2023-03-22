@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
@@ -14,7 +14,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/error-page" element={<NotFoundPage />} />
+        <Route path="*" element={<Navigate to="/error-page" />} />
       </Routes>
     </>
   );
