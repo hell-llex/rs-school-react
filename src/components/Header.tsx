@@ -1,23 +1,20 @@
 import React from 'react';
 import '../App.css';
 import { NavLink } from 'react-router-dom';
+import Location from './Location';
 
-interface HeaderProps {
-  title: string;
-}
-
-const Header = ({ title }: HeaderProps) => {
+const Header = () => {
   return (
     <header className="header">
       <div className="thisPage">
-        This page: <span className="page"> {title}</span>
+        This page: <Location />
       </div>
       <nav className="nav">
         <NavLink to="/" className="nav-item">
           Home
         </NavLink>
         <NavLink to="/about" className="nav-item">
-          About us
+          About Us
         </NavLink>
       </nav>
     </header>

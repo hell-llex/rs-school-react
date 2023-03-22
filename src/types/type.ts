@@ -15,7 +15,3 @@ export interface Film {
 export interface FilmsProps {
   film: Film;
 }
-
-export type SearchInfo = {
-  searchText: string;
-};
