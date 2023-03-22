@@ -1,11 +1,10 @@
-import { SearchInfo } from '../types/type';
 import './Search.css';
 import React, { ChangeEvent } from 'react';
 
-export class Search extends React.Component<Record<string, never>, SearchInfo> {
-  constructor(props: Record<string, never>) {
+export class Search extends React.Component {
+  state = { searchText: '' };
+  constructor(props: never) {
     super(props);
-    this.state = { searchText: '' };
     this.handleInput = this.handleInput.bind(this);
   }
 
