@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
+import { FormsPage } from './pages/FormsPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { Header } from './components/Header';
 
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/forms" element={<FormsPage />} />
         <Route path="/error-page" element={<NotFoundPage />} />
         <Route path="*" element={<Navigate to="/error-page" />} />
       </Routes>
