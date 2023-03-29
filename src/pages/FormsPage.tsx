@@ -152,7 +152,14 @@ export class FormsPage extends React.Component {
                 }`}
               >
                 <label htmlFor="">Author:</label>
-                <input type="text" name="author" id="author" className="author" ref={this.author} />
+                <input
+                  type="text"
+                  name="author"
+                  id="author"
+                  className="author"
+                  ref={this.author}
+                  role="author-input"
+                />
                 <div className="error">
                   <p className="error__required">This field is required!</p>
                   <p className="error__invalid">
@@ -174,6 +181,7 @@ export class FormsPage extends React.Component {
                   id="description"
                   className="description"
                   ref={this.description}
+                  role="description-input"
                 />
                 <div className="error">
                   <p className="error__required">This field is required!</p>
@@ -189,7 +197,14 @@ export class FormsPage extends React.Component {
                 }`}
               >
                 <label htmlFor="">Date shot:</label>
-                <input type="date" name="date" id="date" className="date" ref={this.date} />
+                <input
+                  type="date"
+                  name="date"
+                  id="date"
+                  className="date"
+                  ref={this.date}
+                  role="date-input"
+                />
                 <div className="error">
                   <p className="error__required">This field is required!</p>
                   <p className="error__invalid">Creation date cannot exceed the current date</p>
@@ -203,6 +218,7 @@ export class FormsPage extends React.Component {
                   className="category"
                   defaultValue="Landscape"
                   ref={this.category}
+                  role="category-input"
                 >
                   <option value="Portrait">Portrait</option>
                   <option value="Landscape">Landscape</option>
