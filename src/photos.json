@@ -1,0 +1,20 @@
+[
+  {
+    "author": "hell-llex aefaefaefe 20",
+    "description": "Great photo of the lamp lalalalaaladlalalalala 46",
+    "date": "10-03-2023",
+    "category": "Landscape",
+    "hideAuthor": false,
+    "human": false,
+    "image": "./public/images/image0.jpeg"
+  },
+  {
+    "author": "hell-llex",
+    "description": "It's me",
+    "date": "11-03-2023",
+    "category": "Portrait",
+    "hideAuthor": false,
+    "human": true,
+    "image": "./public/images/image1.jpg"
+  }
+]

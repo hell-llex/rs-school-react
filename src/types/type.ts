@@ -15,3 +15,21 @@ export interface Film {
 export interface FilmsProps {
   film: Film;
 }
+
+export interface Photo {
+  author: string;
+  description: string;
+  date: string;
+  category: string;
+  hideAuthor: boolean;
+  human: boolean | string;
+  image: string;
+}
+
+export interface PhotoProps {
+  photo: Photo;
+}
+
+export interface PhotoList {
+  photo: Photo[];
+}

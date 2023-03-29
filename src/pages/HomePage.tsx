@@ -1,7 +1,11 @@
 import React from 'react';
 import '../App.css';
+import data from '../photos.json';
 import { Search } from '../components/Search';
 import { Cards } from '../components/Cards';
+import { Photo } from 'types/type';
+
+export const homeCards: Photo[] = data;
 
 const HomePage = () => {
   return (
@@ -9,7 +13,7 @@ const HomePage = () => {
       <h1>Home Page</h1>
       <Search />
       <div>
-        <Cards />
+        <Cards photo={homeCards} />
       </div>
     </div>
   );
