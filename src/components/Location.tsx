@@ -12,8 +12,8 @@ const LocationTitle: React.FC<Props> = () => {
     return <span className="page">Home</span>;
   } else if (location.pathname === '/about') {
     return <span className="page">About Us</span>;
-  } else if (location.pathname === '/forms') {
-    return <span className="page">Forms</span>;
+  } else if (location.pathname === '/form') {
+    return <span className="page">Form</span>;
   } else {
     return <span className="page">Error 404</span>;
   }

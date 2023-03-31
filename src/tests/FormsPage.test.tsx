@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormsPage } from '../pages/FormsPage';
+import { FormsPage } from '../pages/FormPage';
 import { test, expect } from 'vitest';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';

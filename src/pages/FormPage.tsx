@@ -1,5 +1,5 @@
 import React, { ChangeEvent, LegacyRef, RefObject } from 'react';
-import './FormsPage.css';
+import './FormPage.css';
 import { Cards } from '../components/Cards';
 import { Photo } from '../types/type';
 import { homeCards } from './HomePage';
@@ -9,7 +9,7 @@ type typeRef =
       RefObject<HTMLInputElement & HTMLSelectElement>)
   | undefined;
 
-export class FormsPage extends React.Component {
+export class FormPage extends React.Component {
   photoArray: Photo[] = [];
   state: {
     photo: Photo;
