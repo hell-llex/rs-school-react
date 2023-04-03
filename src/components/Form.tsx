@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../style/Form.css';
 import { Photo } from '../types/type';
 import { homeCards } from '../pages/HomePage';
@@ -13,7 +13,6 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
   } = useForm<Photo>();
 
   const [сompletedForm, setCompletedForm] = useState(false);
-
   const onSubmit: SubmitHandler<Photo> = (data) => {
     const imageUrl = Boolean(data.image[0])
       ? String(URL.createObjectURL(data.image[0] as File))
@@ -34,7 +33,7 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
     setTimeout(() => setCompletedForm(false), 2000);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isSubmitSuccessful) {
       reset();
     }
@@ -68,7 +67,7 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
               role="author-input"
             />
           </div>
-          {errors?.author && <p style={{ color: 'red' }}>{errors.author.message}</p>}
+          {errors?.author && <p className="error">{errors.author.message}</p>}
           <div className="item">
             <label htmlFor="">Description:</label>
             <input
@@ -92,7 +91,7 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
               role="description-input"
             />
           </div>
-          {errors?.description && <p style={{ color: 'red' }}>{errors.description.message}</p>}
+          {errors?.description && <p className="error">{errors.description.message}</p>}
           <div className="item">
             <label htmlFor="">Date shot:</label>
             <input
@@ -115,7 +114,7 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
               role="date-input"
             />
           </div>
-          {errors?.date && <p style={{ color: 'red' }}>{errors.date.message}</p>}
+          {errors?.date && <p className="error">{errors.date.message}</p>}
           <div className="item">
             <label htmlFor="">Category:</label>
             <select
@@ -137,7 +136,7 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
               <option value="Macro">Macro</option>
             </select>
           </div>
-          {errors?.category && <p style={{ color: 'red' }}>{errors.category.message}</p>}
+          {errors?.category && <p className="error">{errors.category.message}</p>}
           <div className="item">
             <label htmlFor="">Hide author:</label>
             <div className="checker-container">
@@ -195,6 +194,9 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
               <input
                 {...register('image', {
                   required: 'This field is required!',
+                  onChange: (e) => {
+                    console.log(e.target);
+                  },
                 })}
                 type="file"
                 name="image"
@@ -204,11 +206,8 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
               />
               <span className={' '}>Choose a photo</span>
             </label>
-            <div className="error">
-              <p className="error__required">This field is required!</p>
-            </div>
           </div>
-          {errors?.image && <p style={{ color: 'red' }}>{errors.image.message}</p>}
+          {errors?.image && <p className="error">{errors.image.message}</p>}
           <div className="item">
             <input type="submit" value="Submit" className="submit-btn" />
           </div>
