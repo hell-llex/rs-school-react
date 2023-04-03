@@ -1,4 +1,4 @@
-import './Search.css';
+import '../style/Search.css';
 import React, { ChangeEvent } from 'react';
 
 export class Search extends React.Component {

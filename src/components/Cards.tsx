@@ -1,4 +1,4 @@
-import './Cards.css';
+import '../style/Cards.css';
 import React from 'react';
 import { PhotoList, PhotoProps } from '../types/type';
 

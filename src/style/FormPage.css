@@ -1,0 +1,24 @@
+:root {
+  --green: #39c056;
+  --red: #c03939;
+}
+
+.forms-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.forms-page .container-cards {
+  width: 65vw;
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}

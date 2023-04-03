@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.css';
+import '../style/App.css';
 import data from '../photos.json';
 import { Search } from '../components/Search';
 import { Cards } from '../components/Cards';
