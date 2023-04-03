@@ -9,8 +9,7 @@ export const homeCards: Photo[] = data;
 
 const HomePage = () => {
   return (
-    <div className="App">
-      <h1>Home Page</h1>
+    <div className="home-page router__page">
       <Search />
       <div>
         <Cards photo={homeCards} />

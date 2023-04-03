@@ -1,14 +1,12 @@
 import React from 'react';
 import '../style/App.css';
 import { NavLink } from 'react-router-dom';
-import Location from './Location';
+import { useLocation } from 'react-router-dom';
 
 const Header = () => {
+  const location = useLocation().pathname;
   return (
     <header className="header">
-      <div className="thisPage">
-        This page: <Location />
-      </div>
       <nav className="nav">
         <NavLink to="/" className="nav-item">
           Home
@@ -20,6 +18,20 @@ const Header = () => {
           About Us
         </NavLink>
       </nav>
+      <div className="thisPage">
+        This page:{' '}
+        <b>
+          {location === '/'
+            ? 'Home'
+            : location === '/about'
+            ? 'About us'
+            : location === '/form'
+            ? 'Form'
+            : location === '/error-page'
+            ? 'Not Found'
+            : ''}
+        </b>
+      </div>
     </header>
   );
 };

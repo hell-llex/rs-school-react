@@ -3,7 +3,7 @@
   --red: #c03939;
 }
 
-.forms-page {
+.form-page {
   width: 100%;
   height: 100%;
   display: flex;
@@ -12,7 +12,7 @@
   align-items: center;
 }
 
-.forms-page .container-cards {
+.form-page .container-cards {
   width: 65vw;
   padding: 2rem;
   display: flex;
