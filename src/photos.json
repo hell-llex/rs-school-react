@@ -5,7 +5,7 @@
     "date": "10-03-2023",
     "category": "Landscape",
     "hideAuthor": false,
-    "human": false,
+    "human": "0",
     "image": "./public/images/image0.jpeg"
   },
   {
@@ -14,7 +14,7 @@
     "date": "11-03-2023",
     "category": "Portrait",
     "hideAuthor": true,
-    "human": true,
+    "human": "1",
     "image": "./public/images/image1.jpg"
   }
 ]
