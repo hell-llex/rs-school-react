@@ -22,8 +22,8 @@ export interface Photo {
   date: string;
   category: string;
   hideAuthor: boolean;
-  human: boolean | string;
-  image: string;
+  human: string | boolean;
+  image: string | File[];
 }
 
 export interface PhotoProps {
