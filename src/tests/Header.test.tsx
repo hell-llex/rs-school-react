@@ -9,7 +9,7 @@ describe('Header component', () => {
   test('renders the home and about links', () => {
     render(<Header />, { wrapper: MemoryRouter });
     expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Forms' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Form' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'About Us' })).toBeInTheDocument();
   });
 });

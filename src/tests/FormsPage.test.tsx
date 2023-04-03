@@ -1,22 +1,17 @@
 import React from 'react';
-import { FormsPage } from '../pages/FormPage';
+import { FormPage } from '../pages/FormPage';
 import { test, expect } from 'vitest';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
-describe('FormsPage', () => {
+describe('FormPage', () => {
   test('displays the correct title page', () => {
-    const { getByText } = render(<FormsPage />);
-    expect(getByText('Forms')).toBeInTheDocument();
-  });
-
-  test('displays the correct title page', () => {
-    const { getByText } = render(<FormsPage />);
+    const { getByText } = render(<FormPage />);
     expect(getByText('Upload photo')).toBeInTheDocument();
   });
 
   test('displays the correct label', () => {
-    const { getByText } = render(<FormsPage />);
+    const { getByText } = render(<FormPage />);
     expect(getByText('Author:')).toBeInTheDocument();
     expect(getByText('Description:')).toBeInTheDocument();
     expect(getByText('Date shot:')).toBeInTheDocument();
@@ -26,7 +21,7 @@ describe('FormsPage', () => {
   });
 
   test('adds a new photo to the photoArray when form is submitted', () => {
-    const { getByText } = render(<FormsPage />);
+    const { getByText } = render(<FormPage />);
     const authorInput = screen.getByRole('author-input') as HTMLInputElement;
     const descriptionInput = screen.getByRole('description-input') as HTMLInputElement;
     const dateInput = screen.getByRole('date-input') as HTMLInputElement;
