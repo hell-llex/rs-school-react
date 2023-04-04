@@ -5,7 +5,7 @@
 
 .forms-container {
   padding: 1rem;
-  width: 60vw;
+  width: 50vw;
   min-height: 40vh;
   display: flex;
   flex-direction: column;
@@ -88,38 +88,16 @@
 }
 
 .error {
-  position: absolute;
-  display: none;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  bottom: -0.3vh;
-  right: 0;
-  margin: 0;
-  padding: 0 1vw 0 0;
-  overflow: hidden;
-  width: 100%;
-  min-height: 4vh;
-}
-
-.item.required .error,
-.item.invalid .error {
-  position: absolute;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
-  bottom: -0.3vh;
-  right: 0;
-  margin: 0;
-  padding: 0 1vw 0 0;
-  overflow: hidden;
   width: 100%;
-  min-height: 4vh;
+  margin: 0;
+  padding: 0 1vw;
+  color: var(--red);
 }
 
-.item.required input,
-.item.invalid input {
+.input-error {
   border: 2px solid var(--red);
   background-color: var(--red);
   color: white;
@@ -128,72 +106,6 @@
 
 .item.required .input-file span {
   background-color: var(--red);
-}
-
-.error__invalid,
-.error__required {
-  display: none;
-  margin: 0;
-  overflow: hidden;
-}
-
-.item.required .error__required {
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  bottom: 0;
-  right: 0;
-  margin: auto 0;
-  font-size: 1.3vmin;
-  color: var(--red);
-  height: 2vh;
-  line-height: 100%;
-  width: 100%;
-}
-
-.item.invalid .error__invalid {
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  bottom: 0;
-  right: 0;
-  margin: auto 0;
-  font-size: 1.3vmin;
-  color: var(--red);
-  width: 100%;
-  line-height: 100%;
-}
-
-.item.required .input-file~.error {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  bottom: -0.3vh;
-  right: 0;
-  margin: 0;
-  padding: 0 0 0 0;
-  overflow: hidden;
-  width: 100%;
-  min-height: 3vh;
-}
-
-.item.required .input-file~.error .error__required {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  bottom: 0;
-  right: 0;
-  margin: auto 0;
-  font-size: 14px;
-  color: var(--red);
-  height: 2vh;
-  line-height: 100%;
-  width: 100%;
 }
 
 .checker-container {
@@ -207,10 +119,10 @@
   display: block;
   font-size: 25px;
   height: 1em;
-  width: 10vw;
+  width: 1em;
   box-sizing: content-box;
-  padding: 0.15em;
-  border-radius: 0.25em;
+  padding: 0.3em;
+  border-radius: 0.3em;
   transition: transform 0.4s ease;
   cursor: pointer;
 }
@@ -219,14 +131,12 @@
   width: 1em;
   height: 1em;
   transition: transform 0.4s ease;
-  transform: translateX(-0.4em);
   z-index: 5;
 }
 
 .checkmark svg {
   display: block;
   background: #e5e5e5;
-  transform: translateX(0.4em);
   border-radius: 0.15em;
   transition: background-color 0.4s ease, transform calc(0.4s * 1.5) ease;
 }
@@ -245,13 +155,8 @@
   visibility: hidden;
 }
 
-.checkbox:checked~.checkmark {
-  transform: translate(4.4em);
-}
-
 .checkbox:checked~.checkmark svg {
   background: var(--green);
-  transform: translate(-0.4em);
 }
 
 .checkbox:checked~.checkmark svg path {
@@ -286,7 +191,6 @@
 
 .check-bg:before {
   transition: transform 0.4s ease;
-  transform: translateY(30%);
   transform-origin: bottom center;
   background: black;
   filter: blur(0.25em);
@@ -294,14 +198,9 @@
   z-index: -1;
 }
 
-.checker.checker:active {
-  transform: scale(0.96);
+.checker.checker:active svg {
+  transform: scale(0.9);
   transition-duration: calc(0.4s / 2);
-}
-
-.checker.checker:active .check-bg::before {
-  transform: translateY(0) scale(0.96);
-  opacity: 0.2;
 }
 
 .toggle-radio {
@@ -367,7 +266,8 @@
   transition: all 0.2s ease;
 }
 
-input[type=radio] {
+#no,
+#yes {
   display: none;
 }
 
@@ -440,7 +340,7 @@ input[type=radio] {
   border-radius: 5px;
   background-color: #7c7c7c;
   line-height: 22px;
-  height: 40px;
+  height: 5vh;
   padding: 10% 10%;
   box-sizing: border-box;
   border: none;
@@ -449,15 +349,15 @@ input[type=radio] {
   transition: all 0.2s;
 }
 
-#image:valid~span {
+.image.image-full {
   background-color: var(--green);
 }
 
-.item.required #image:valid~span {
+.image.image-error {
   background-color: var(--red);
 }
 
-.input-file input[type=file] {
+.input-file #image {
   position: absolute;
   z-index: -1;
   opacity: 0;
@@ -466,7 +366,7 @@ input[type=radio] {
   height: 0;
 }
 
-.input-file input[type=file]:focus+span {
+.input-file #image:focus+span {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
 }
 
@@ -478,7 +378,7 @@ input[type=radio] {
   background-color: #2E703A;
 }
 
-.input-file input[type=file]:disabled+span {
+.input-file #image:disabled+span {
   background-color: #eee;
 }
 

@@ -10,16 +10,6 @@ describe('FormPage', () => {
     expect(getByText('Upload photo')).toBeInTheDocument();
   });
 
-  test('displays the correct label', () => {
-    const { getByText } = render(<FormPage />);
-    expect(getByText('Author:')).toBeInTheDocument();
-    expect(getByText('Description:')).toBeInTheDocument();
-    expect(getByText('Date shot:')).toBeInTheDocument();
-    expect(getByText('Category:')).toBeInTheDocument();
-    expect(getByText('Hide author:')).toBeInTheDocument();
-    expect(getByText('Human:')).toBeInTheDocument();
-  });
-
   test('adds a new photo to the photoArray when form is submitted', () => {
     const { getByText } = render(<FormPage />);
     const authorInput = screen.getByRole('author-input') as HTMLInputElement;

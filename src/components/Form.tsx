@@ -4,7 +4,9 @@ import { Photo } from '../types/type';
 import { homeCards } from '../pages/HomePage';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-export function Form(props: { updateData: (arg0: Photo) => void }) {
+export function Form(props: {
+  updateData: (arg0: string, arg1: React.ChangeEvent<HTMLInputElement> | Photo) => void;
+}) {
   const {
     register,
     handleSubmit,
@@ -13,6 +15,8 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
   } = useForm<Photo>();
 
   const [сompletedForm, setCompletedForm] = useState(false);
+  const [fileExists, setFileExists] = useState(false);
+
   const onSubmit: SubmitHandler<Photo> = (data) => {
     const imageUrl = Boolean(data.image[0])
       ? String(URL.createObjectURL(data.image[0] as File))
@@ -28,7 +32,7 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
       image: imageUrl,
     };
     setCompletedForm(true);
-    props.updateData(photoCard);
+    props.updateData('all', photoCard);
     homeCards.push(photoCard);
     setTimeout(() => setCompletedForm(false), 2000);
   };
@@ -36,8 +40,13 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset();
+      setFileExists(false);
     }
   }, [reset, isSubmitSuccessful]);
+
+  function updateCard(event: React.ChangeEvent<HTMLInputElement>) {
+    props.updateData('one', event);
+  }
 
   return (
     <form className="forms-container" onSubmit={handleSubmit(onSubmit)}>
@@ -47,7 +56,7 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
       ) : (
         <>
           <div className="item">
-            <label htmlFor="">Author:</label>
+            <label>Author:</label>
             <input
               {...register('author', {
                 minLength: {
@@ -59,11 +68,12 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
                   message: 'The author must have at least 1 and no more than 20 characters.',
                 },
                 required: 'This field is required!',
+                onChange: updateCard,
               })}
               type="text"
               name="author"
               id="author"
-              className="author"
+              className={`author ${errors.author ? 'input-error' : ''}`}
               role="author-input"
             />
           </div>
@@ -83,11 +93,12 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
                     'The description must contain not less than 3 and not more than 40 characters.',
                 },
                 required: 'This field is required!',
+                onChange: updateCard,
               })}
               type="text"
               name="description"
               id="description"
-              className="description"
+              className={`description ${errors.description ? 'input-error' : ''}`}
               role="description-input"
             />
           </div>
@@ -97,6 +108,7 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
             <input
               {...register('date', {
                 required: 'This field is required!',
+                onChange: updateCard,
                 validate: (value) =>
                   new Date(value) <
                     new Date(
@@ -110,7 +122,7 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
               type="date"
               name="date"
               id="date"
-              className="date"
+              className={`date ${errors.date ? 'input-error' : ''}`}
               role="date-input"
             />
           </div>
@@ -118,7 +130,9 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
           <div className="item">
             <label htmlFor="">Category:</label>
             <select
-              {...register('category')}
+              {...register('category', {
+                onChange: updateCard,
+              })}
               name="category"
               id="category"
               className="category"
@@ -142,7 +156,7 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
             <div className="checker-container">
               <label className="checker">
                 <input
-                  {...register('hideAuthor')}
+                  {...register('hideAuthor', { onChange: updateCard })}
                   className="checkbox"
                   type="checkbox"
                   id="hideAuthor"
@@ -167,9 +181,15 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
           <div className="item">
             <label htmlFor="">Human:</label>
             <div className="toggle-radio">
-              <input {...register('human')} type="radio" name="human" id="yes" value="1" />
               <input
-                {...register('human')}
+                {...register('human', { onChange: updateCard })}
+                type="radio"
+                name="human"
+                id="yes"
+                value="1"
+              />
+              <input
+                {...register('human', { onChange: updateCard })}
                 type="radio"
                 id="no"
                 name="human"
@@ -195,7 +215,8 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
                 {...register('image', {
                   required: 'This field is required!',
                   onChange: (e) => {
-                    console.log(e.target);
+                    updateCard(e);
+                    setFileExists(true);
                   },
                 })}
                 type="file"
@@ -204,7 +225,11 @@ export function Form(props: { updateData: (arg0: Photo) => void }) {
                 className="image"
                 accept="image/*"
               />
-              <span className={' '}>Choose a photo</span>
+              <span
+                className={`image ${errors.image ? 'image-error' : fileExists ? 'image-full' : ''}`}
+              >
+                Choose a photo
+              </span>
             </label>
           </div>
           {errors?.image && <p className="error">{errors.image.message}</p>}

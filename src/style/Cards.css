@@ -49,6 +49,7 @@
   padding: 0.5rem;
   width: 100%;
   backdrop-filter: blur(15px);
+  border-radius: 15px;
   transition: all 0.3s ease-in-out;
 }
 
@@ -66,7 +67,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-.container-info div{
+.container-info div {
   text-align: start;
   width: 100%;
 }
