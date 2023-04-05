@@ -1,5 +1,5 @@
 import '../style/Search.css';
-import React, { ChangeEvent, useState, useEffect } from 'react';
+import React, { ChangeEvent, useState, useEffect, useRef } from 'react';
 
 export function Search() {
   const [searchText, setSearchText] = useState(
@@ -8,13 +8,21 @@ export function Search() {
       : ''
   );
 
+  const searchRef = useRef<string>('');
+
   function handleInput(e: ChangeEvent<HTMLInputElement>) {
     setSearchText(e.target.value);
   }
 
   useEffect(() => {
-    localStorage.setItem('searchText', searchText);
+    searchRef.current = searchText;
   }, [searchText]);
+
+  useEffect(() => {
+    return () => {
+      localStorage.setItem('searchText', searchRef.current);
+    };
+  }, []);
 
   return (
     <div className="container-search">
