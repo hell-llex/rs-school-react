@@ -6,7 +6,7 @@
     "category": "Landscape",
     "hideAuthor": false,
     "human": "0",
-    "image": "./public/images/image0.jpeg"
+    "image": "./images/image0.jpeg"
   },
   {
     "author": "hell-llex",
@@ -15,6 +15,6 @@
     "category": "Portrait",
     "hideAuthor": true,
     "human": "1",
-    "image": "./public/images/image1.jpg"
+    "image": "./images/image1.jpg"
   }
 ]

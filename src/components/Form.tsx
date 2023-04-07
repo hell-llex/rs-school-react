@@ -110,14 +110,7 @@ export function Form(props: {
                 required: 'This field is required!',
                 onChange: updateCard,
                 validate: (value) =>
-                  new Date(value) <
-                    new Date(
-                      `${new Date().getFullYear()}-${
-                        new Date().getMonth() + 1 >= 10
-                          ? new Date().getMonth() + 1
-                          : '0' + String(new Date().getMonth() + 1)
-                      }-${new Date().getDate()}`
-                    ) || 'Creation date cannot exceed the current date',
+                  new Date(value) < new Date() || 'Creation date cannot exceed the current date',
               })}
               type="date"
               name="date"
