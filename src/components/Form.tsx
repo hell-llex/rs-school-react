@@ -49,14 +49,14 @@ export function Form(props: {
   }
 
   return (
-    <form className="forms-container" onSubmit={handleSubmit(onSubmit)}>
-      <h2 className="forms-title-base">Upload photo</h2>
+    <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
+      <h2 className="form-title-base">Upload photo</h2>
       {сompletedForm ? (
-        <h2 className="forms-title-completed">Data saved and uploaded</h2>
+        <h2 className="form-title-completed">Data saved and uploaded</h2>
       ) : (
         <>
           <div className="item">
-            <label>Author:</label>
+            <label className="title">Author:</label>
             <input
               {...register('author', {
                 minLength: {
@@ -79,7 +79,7 @@ export function Form(props: {
           </div>
           {errors?.author && <p className="error">{errors.author.message}</p>}
           <div className="item">
-            <label htmlFor="">Description:</label>
+            <label className="title">Description:</label>
             <input
               {...register('description', {
                 minLength: {
@@ -104,7 +104,7 @@ export function Form(props: {
           </div>
           {errors?.description && <p className="error">{errors.description.message}</p>}
           <div className="item">
-            <label htmlFor="">Date shot:</label>
+            <label className="title">Date shot:</label>
             <input
               {...register('date', {
                 required: 'This field is required!',
@@ -121,7 +121,7 @@ export function Form(props: {
           </div>
           {errors?.date && <p className="error">{errors.date.message}</p>}
           <div className="item">
-            <label htmlFor="">Category:</label>
+            <label className="title">Category:</label>
             <select
               {...register('category', {
                 onChange: updateCard,
@@ -145,7 +145,7 @@ export function Form(props: {
           </div>
           {errors?.category && <p className="error">{errors.category.message}</p>}
           <div className="item">
-            <label htmlFor="">Hide author:</label>
+            <label className="title">Hide author:</label>
             <div className="checker-container">
               <label className="checker">
                 <input
@@ -172,7 +172,7 @@ export function Form(props: {
             </div>
           </div>
           <div className="item">
-            <label htmlFor="">Human:</label>
+            <label className="title">Human:</label>
             <div className="toggle-radio">
               <input
                 {...register('human', { onChange: updateCard })}

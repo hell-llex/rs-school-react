@@ -52,7 +52,7 @@ export function FormPage() {
 
   return (
     <div className="form-page router__page">
-      <div className={`form-container ${animationCard ? 'submit-card' : ''}`}>
+      <div className={`forms-container ${animationCard ? 'submit-card' : ''}`}>
         <Form updateData={updateData} />
         <Card photo={photo} />
       </div>

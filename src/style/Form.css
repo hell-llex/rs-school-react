@@ -3,8 +3,9 @@
   --red: #c03939;
 }
 
-.forms-container {
+.form-container {
   padding: 1rem;
+  min-width: 400px;
   width: 50vw;
   min-height: 40vh;
   display: flex;
@@ -16,13 +17,13 @@
   border-radius: 10px;
 }
 
-.forms-title-base {
+.form-title-base {
   align-self: center;
   margin: 0;
   font-size: 30px;
 }
 
-.forms-title-completed {
+.form-title-completed {
   margin: auto 0;
   align-self: center;
   font-size: 40px;
@@ -35,16 +36,17 @@
   width: 100%;
   gap: 0.5rem;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
 
-.item label {
+.item .title {
   display: inline;
   font-size: 22px;
   font-weight: 500;
-  width: 25%;
+  min-width: 35%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -55,7 +57,7 @@
 .date,
 .category {
   height: 3vh;
-  width: 100%;
+  min-width: 60%;
   border: 2px gray solid;
   border-radius: 5px;
   padding: 0 10px;
@@ -66,13 +68,7 @@
 .description:focus,
 .date:focus,
 .category:focus {
-  height: 3vh;
-  width: 100%;
   outline: whitesmoke auto 2px;
-  border: 2px gray solid;
-  border-radius: 5px;
-  padding: 0 10px;
-  font-size: 16px;
 }
 
 .item.required,
@@ -109,7 +105,7 @@
 }
 
 .checker-container {
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -205,7 +201,7 @@
 
 .toggle-radio {
   position: relative;
-  width: 100%;
+  min-width: 60%;
   height: 3vh;
   display: flex;
   justify-content: flex-start;
@@ -219,7 +215,8 @@
   justify-content: space-evenly;
   align-items: center;
   gap: 10px;
-  width: 10vw;
+  min-width: 10rem;
+  max-width: 14rem;
   padding: 0 1vw;
   height: 3vh;
   text-align: center;
@@ -229,7 +226,7 @@
 }
 
 .switch .check {
-  width: 2vw;
+  min-width: 3rem;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -239,6 +236,7 @@
 #no:checked~.switch span {
   width: 20px;
   height: 4px;
+  margin: 0px 0px 0px 0.5em;
   background: #fff;
   display: block;
   transform: rotate(-45deg);
@@ -248,7 +246,7 @@
 #yes:checked~.switch span {
   width: 20px;
   height: 4px;
-  margin: 0px 0px 0px 0.5em;
+  margin: 0px 0px 0px 1.5em;
   background: #fff;
   display: block;
   transform: rotate(-45deg);
