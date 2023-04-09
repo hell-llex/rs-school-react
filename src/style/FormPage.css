@@ -40,4 +40,5 @@
   flex-wrap: wrap;
   gap: 2rem;
   overflow: hidden;
+  font-size: inherit;
 }

@@ -1,12 +1,30 @@
+import { IPhotosApi } from 'types/type';
+import { getSearchPhotos } from '../api';
 import '../style/Search.css';
 import React, { ChangeEvent, useState, useEffect, useRef } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
-export function Search() {
+type Search = { search: string };
+
+export function Search(props: { updateData: (arg0: IPhotosApi) => void }) {
   const [searchText, setSearchText] = useState(
     localStorage.getItem('searchText')
       ? JSON.parse(JSON.stringify(localStorage.getItem('searchText')))
       : ''
   );
+
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitSuccessful, errors },
+    reset,
+  } = useForm<Search>();
+
+  const onSubmit: SubmitHandler<Search> = (data) => {
+    getSearchPhotos(data.search).then((responce) => {
+      props.updateData(responce.photos);
+    });
+  };
 
   const searchRef = useRef<string>('');
 
@@ -24,19 +42,28 @@ export function Search() {
     };
   }, []);
 
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [reset, isSubmitSuccessful]);
+
   return (
-    <div className="container-search">
+    <form className="search-forms-container" onSubmit={handleSubmit(onSubmit)}>
       <input
+        {...register('search', {
+          required: true,
+        })}
         defaultValue={searchText}
         onChange={handleInput}
+        style={{ border: errors.search ? '1px solid red' : '0px solid white' }}
         type="text"
         placeholder="Search"
         className="search"
         role="search"
+        autoComplete="none"
       />
-      <button type="submit" className="btn-search">
-        Search
-      </button>
-    </div>
+      <input type="submit" value="Search" className="btn-search" />
+    </form>
   );
 }
