@@ -15,10 +15,10 @@ const HomePage = () => {
         return {
           author: item.owner,
           description: item.title,
-          date: '---',
-          category: '---',
+          date: '',
+          category: '',
           hideAuthor: false,
-          human: '0',
+          human: '',
           image: `https://live.staticflickr.com/${item.server}/${item.id}_${
             item.secret
           }_${'m'}.jpg`,

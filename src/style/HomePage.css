@@ -7,3 +7,17 @@
 .cards-container_title {
   margin: 0;
 }
+
+.search-cards-container .card {}
+
+.search-cards-container .card .container-info {
+  height: 30%;
+  overflow: hidden;
+  justify-content: flex-start;
+}
+
+.search-cards-container .card .container-info .info__description {
+  white-space: wrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
