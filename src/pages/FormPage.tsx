@@ -54,12 +54,17 @@ export function FormPage() {
     <div className="form-page router__page">
       <div className={`forms-container ${animationCard ? 'submit-card' : ''}`}>
         <Form updateData={updateData} />
-        <Card photo={photo} />
+        <Card photo={photo} index={0} />
       </div>
       <div>
         <h2>Latest update</h2>
       </div>
-      <Cards photo={photoArray} />
+      <Cards
+        photo={photoArray}
+        setPopupCard={function (): void {
+          throw new Error('Function not implemented.');
+        }}
+      />
     </div>
   );
 }

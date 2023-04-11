@@ -19,19 +19,23 @@ export function Card(props: { photo: Photo; index: number }) {
         }}
       ></div>
       <div className="container-info">
-        <div className="info__author">
+        <div className="info__author" role="author">
           <b>Author: </b>
           {item.hideAuthor ? '*********' : item.author}
         </div>
-        <div className="info__description">
+        <div className="info__description" role="description">
           <b>Description: </b>
           {item.description}
         </div>
-        <div className="info__date" style={{ display: item.date ? '' : 'none' }}>
+        <div className="info__date" style={{ display: item.date ? '' : 'none' }} role="date">
           <b>Date: </b>
           {item.date.split('-').reverse().join('.')}
         </div>
-        <div className="info__category" style={{ display: item.category ? '' : 'none' }}>
+        <div
+          className="info__category"
+          style={{ display: item.category ? '' : 'none' }}
+          role="category"
+        >
           <b>Category: </b>
           {item.category}
         </div>
