@@ -52,7 +52,7 @@ const HomePage = () => {
         <h2 className="cards-container_title">Search Cards</h2>
         {searchCards.length === 0 && !loader ? (
           <>
-            <h3>Either you haven&apos;t entered a text query yet or nothing is found... </h3>
+            <h3>Either you haven&apos;t entered a text query yet or nothing is found...</h3>
           </>
         ) : loader ? (
           <Loader />
