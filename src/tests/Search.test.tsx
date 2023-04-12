@@ -6,16 +6,7 @@ import '@testing-library/jest-dom/extend-expect';
 
 describe('Search component', () => {
   test('should render correctly', () => {
-    render(
-      <Search
-        updateData={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-        setLoader={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-      />
-    );
+    render(<Search updateData={function (): void {}} setLoader={function (): void {}} />);
     const inputField = screen.getByRole('search');
     const searchButton = screen.getByRole('button', { name: 'Search' });
     expect(inputField).toBeInTheDocument();
@@ -23,16 +14,7 @@ describe('Search component', () => {
   });
 
   test('should update search text on input change', () => {
-    render(
-      <Search
-        updateData={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-        setLoader={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-      />
-    );
+    render(<Search updateData={function (): void {}} setLoader={function (): void {}} />);
     const searchInput = screen.getByRole('search') as HTMLInputElement;
 
     fireEvent.change(searchInput, { target: { value: 'test' } });
@@ -40,16 +22,7 @@ describe('Search component', () => {
   });
 
   test('should update state on input change', () => {
-    render(
-      <Search
-        updateData={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-        setLoader={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-      />
-    );
+    render(<Search updateData={function (): void {}} setLoader={function (): void {}} />);
     const searchInput = screen.getByRole('search') as HTMLInputElement;
 
     fireEvent.change(searchInput, { target: { value: 'test' } });
@@ -57,30 +30,14 @@ describe('Search component', () => {
   });
 
   test('should save search text to local storage on unmount', () => {
-    render(
-      <Search
-        updateData={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-        setLoader={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-      />
-    );
+    render(<Search updateData={function (): void {}} setLoader={function (): void {}} />);
     const searchInput = screen.getByRole('search') as HTMLInputElement;
 
     fireEvent.change(searchInput, { target: { value: 'test' } });
     expect(searchInput).toHaveValue('test');
 
     const { unmount } = render(
-      <Search
-        updateData={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-        setLoader={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-      />
+      <Search updateData={function (): void {}} setLoader={function (): void {}} />
     );
     unmount();
 
@@ -88,16 +45,7 @@ describe('Search component', () => {
   });
 
   test('should load search text from local storage on mount', () => {
-    render(
-      <Search
-        updateData={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-        setLoader={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-      />
-    );
+    render(<Search updateData={function (): void {}} setLoader={function (): void {}} />);
     const searchInput = screen.getByRole('search') as HTMLInputElement;
 
     fireEvent.change(searchInput, {
