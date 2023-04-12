@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { IPhotosApi } from 'types/type';
 import { getSearchPhotos } from '../api';
 import '../style/Search.css';
@@ -43,6 +44,15 @@ export function Search(props: {
 
   useEffect(() => {
     return () => {
+      if (localStorage.getItem('searchText')) {
+        props.setLoader(true);
+        getSearchPhotos(JSON.parse(JSON.stringify(localStorage.getItem('searchText')))).then(
+          (responce) => {
+            props.updateData(responce.photos);
+            props.setLoader(false);
+          }
+        );
+      }
       localStorage.setItem('searchText', searchRef.current);
     };
   }, []);
