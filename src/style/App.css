@@ -1,0 +1,72 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  position: relative;
+}
+
+#root {
+  max-width: 1440px;
+  width: 90vw;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.header {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(44, 44, 44);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.thisPage {
+  padding: 1vh 0;
+  width: 100%;
+  font-size: 30px;
+  color: aliceblue;
+  background-color: gray;
+}
+
+.page {
+  width: 3rem;
+  font-size: 30px;
+  font-weight: 700;
+  color: rgb(0, 47, 255);
+}
+
+.nav {
+  min-height: 4rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-item {
+  height: 100%;
+  font-size: 24px;
+  color: aliceblue;
+}
+
+.nav-item:hover {
+  font-size: 24px;
+  color: rgb(31, 216, 219);
+}
+
+.nav-item.active {
+  font-size: 24px;
+  color: rgb(31, 216, 219);
+}
+
+.router__page {
+  padding: 5vh 0 0 0;
+}
