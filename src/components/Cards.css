@@ -1,0 +1,29 @@
+.container-cards {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.card {
+  width: 15rem;
+  height: 20rem;
+  background-color: rgb(65, 65, 65);
+  border-radius: 15px;
+  position: relative;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  overflow: hidden;
+}
+
+.container-info {
+  position: relative;
+  padding: 0.5rem;
+  width: 100%;
+  backdrop-filter: blur(15px);
+}
