@@ -4,9 +4,9 @@ import { Photo } from '../types/type';
 import { homeCards } from '../pages/HomePage';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-export function Form(props: {
+const Form = (props: {
   updateData: (arg0: string, arg1: React.ChangeEvent<HTMLInputElement> | Photo) => void;
-}) {
+}) => {
   const {
     register,
     handleSubmit,
@@ -233,4 +233,6 @@ export function Form(props: {
       )}
     </form>
   );
-}
+};
+
+export { Form };

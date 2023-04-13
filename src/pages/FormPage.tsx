@@ -4,7 +4,7 @@ import { Card, Cards } from '../components/Cards';
 import { Photo } from '../types/type';
 import { Form } from '../components/Form';
 
-export function FormPage() {
+const FormPage = () => {
   const [photoArray, setPhotoArray] = useState<Photo[]>([]);
   const [animationCard, setAnimationCard] = useState(false);
   const [photo, setPhoto] = useState<Photo>({
@@ -67,4 +67,6 @@ export function FormPage() {
       />
     </div>
   );
-}
+};
+
+export { FormPage };

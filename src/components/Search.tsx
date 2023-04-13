@@ -7,10 +7,10 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 type Search = { search: string };
 
-export function Search(props: {
+const Search = (props: {
   updateData: (arg0: IPhotosApi) => void;
   setLoader: (arg0: boolean) => void;
-}) {
+}) => {
   const [searchText, setSearchText] = useState(
     localStorage.getItem('searchText')
       ? JSON.parse(JSON.stringify(localStorage.getItem('searchText')))
@@ -82,4 +82,6 @@ export function Search(props: {
       <input type="submit" value="Search" className="btn-search" />
     </form>
   );
-}
+};
+
+export { Search };

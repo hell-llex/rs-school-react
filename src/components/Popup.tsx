@@ -3,10 +3,10 @@ import '../style/Popup.css';
 import { Photo } from '../types/type';
 import { Card } from './Cards';
 
-export function Popup(props: {
+const Popup = (props: {
   photo: Photo;
   setPopupCard: (arg0: { show: boolean; card: Photo | undefined }) => void;
-}) {
+}) => {
   function handleClick(event: React.MouseEvent<HTMLElement>) {
     const target = event.target as HTMLElement;
     if (target.classList.contains('popup') || target.closest('.icon-close')) {
@@ -28,4 +28,6 @@ export function Popup(props: {
       </div>
     </div>
   );
-}
+};
+
+export { Popup };

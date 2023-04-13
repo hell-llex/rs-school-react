@@ -2,7 +2,7 @@ import '../style/Cards.css';
 import React from 'react';
 import { Photo } from '../types/type';
 
-export function Card(props: { photo: Photo; index: number }) {
+const Card = (props: { photo: Photo; index: number }) => {
   const item = props.photo;
   return (
     <div className="card" data-index={props.index}>
@@ -46,11 +46,12 @@ export function Card(props: { photo: Photo; index: number }) {
       </div>
     </div>
   );
-}
-export function Cards(props: {
+};
+
+const Cards = (props: {
   photo: Photo[];
   setPopupCard: (arg0: { show: boolean; card: Photo }) => void;
-}) {
+}) => {
   const data = props.photo;
   function handleClick(event: React.MouseEvent<HTMLElement>) {
     const target = event.target as HTMLElement;
@@ -69,4 +70,6 @@ export function Cards(props: {
       ))}
     </div>
   );
-}
+};
+
+export { Card, Cards };
