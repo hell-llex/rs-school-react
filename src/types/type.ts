@@ -8,14 +8,6 @@ export interface Photo {
   image: string | File[];
 }
 
-export interface PhotoProps {
-  photo: Photo;
-}
-
-export interface PhotoList {
-  photo: Photo[];
-}
-
 export interface IPhotoApi {
   id: string;
   owner: string;
