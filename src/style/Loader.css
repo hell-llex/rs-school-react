@@ -1,0 +1,84 @@
+.loader-container {
+  margin: 0;
+  padding: 3vh 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+svg {
+  margin: auto;
+}
+
+.spiner path {
+  stroke-dasharray: 338px;
+  stroke-dashoffset: 338px;
+  stroke-linecap: round;
+  transform-origin: center;
+  animation-name: spiner, rotating, fill;
+  animation-duration: 1333ms, 5332ms, 5332ms;
+  animation-timing-function: cubic-bezier(.4, 0, .2, 1), steps(4), linear;
+  animation-iteration-count: infinite, infinite, infinite;
+  fill: none;
+  stroke-width: 16px;
+  stroke: #007eff;
+}
+
+g.spiner {
+  animation: rotate 1568.63ms linear infinite;
+  transform-origin: center;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes spiner {
+  0% {
+    stroke-dashoffset: 337.3px;
+  }
+
+  50% {
+    stroke-dashoffset: 0px;
+  }
+
+  to {
+    stroke-dashoffset: -332.9px;
+  }
+}
+
+@keyframes fill {
+
+  0%,
+  20% {
+    stroke: #4285f4;
+  }
+
+  33% {
+    stroke: #e20000;
+  }
+
+  66% {
+    stroke: #ffe500;
+  }
+
+  100% {
+    stroke: #39d800;
+  }
+}
