@@ -32,3 +32,29 @@ export interface SearchResponce {
   photos: IPhotosApi;
   stat: string;
 }
+
+export interface IFormCards {
+  сards: Photo[];
+  isLoading: boolean;
+  error: string;
+}
+
+export type ILatestCards = IFormCards;
+
+export type ISearchCards = IFormCards;
+
+export interface IPopupCard {
+  show: boolean;
+  card?: Photo;
+  error: string;
+}
+export interface ILoader {
+  show: boolean;
+  error: string;
+}
+
+export interface MyState {
+  formCards?: IFormCards;
+  latestCards?: ILatestCards;
+  popupCard?: IPopupCard;
+}

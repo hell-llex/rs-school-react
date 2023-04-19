@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import '../style/FormPage.css';
 import { Card, Cards } from '../components/Cards';
-import { Photo } from '../types/type';
+import { MyState, Photo } from '../types/type';
 import { Form } from '../components/Form';
+// import { useSelector } from 'react-redux';
+import { useAppSelector } from '../hooks/redux';
 
 const FormPage = () => {
-  const [photoArray, setPhotoArray] = useState<Photo[]>([]);
-  const [animationCard, setAnimationCard] = useState(false);
+  // const [photoArray, setPhotoArray] = useState<Photo[]>([]);
+  const photoArray = useAppSelector((state) => state.latestCards!.сards);
+  // const [animationCard, setAnimationCard] = useState(false);
   const [photo, setPhoto] = useState<Photo>({
     author: '',
     description: '',
@@ -33,11 +36,12 @@ const FormPage = () => {
         [key]: value,
       }));
     } else if (items === 'all') {
-      const currentPhotoArray: Photo[] = Object.assign([], photoArray);
-      currentPhotoArray.unshift(data as Photo);
-      setPhotoArray(currentPhotoArray);
-      setAnimationCard(true);
-      setTimeout(() => setAnimationCard(false), 1950);
+      // const currentPhotoArray: Photo[] = Object.assign([], photoArray);
+      // currentPhotoArray.unshift(data as Photo);
+      // setPhotoArray(currentPhotoArray);
+
+      // setAnimationCard(true);
+      // setTimeout(() => setAnimationCard(false), 1950);
       setPhoto({
         author: '',
         description: '',
@@ -52,19 +56,17 @@ const FormPage = () => {
 
   return (
     <div className="form-page router__page">
-      <div className={`forms-container ${animationCard ? 'submit-card' : ''}`}>
+      <div className="forms-container">
         <Form updateData={updateData} />
-        <Card photo={photo} index={0} />
+        <div className="example-card">
+          <h2>Example card:</h2>
+          <Card photo={photo} index={0} />
+        </div>
       </div>
       <div>
         <h2>Latest update</h2>
       </div>
-      <Cards
-        photo={photoArray}
-        setPopupCard={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-      />
+      <Cards photo={photoArray} />
     </div>
   );
 };

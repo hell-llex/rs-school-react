@@ -1,6 +1,10 @@
 import '../style/Cards.css';
 import React from 'react';
 import { Photo } from '../types/type';
+// import { useDispatch } from 'react-redux';
+// import { popupCard } from '../store/formSlice';
+import { useAppDispatch } from '../hooks/redux';
+import { popupCard } from '../store/slice/popupSlice';
 
 const Card = (props: { photo: Photo; index: number }) => {
   const item = props.photo;
@@ -48,26 +52,29 @@ const Card = (props: { photo: Photo; index: number }) => {
   );
 };
 
-const Cards = (props: {
-  photo: Photo[];
-  setPopupCard: (arg0: { show: boolean; card: Photo }) => void;
-}) => {
+const Cards = (props: { photo: Photo[] }) => {
   const data = props.photo;
+  const dispatch = useAppDispatch();
+  const addPopupCard = (item: { show: boolean; card: Photo }) => dispatch(popupCard(item));
   function handleClick(event: React.MouseEvent<HTMLElement>) {
     const target = event.target as HTMLElement;
     if (target.closest('.card')) {
       const targetCard = target.closest('.card') as HTMLElement;
-      props.setPopupCard({
+      addPopupCard({
         show: true,
         card: data[Number(targetCard!.dataset.index)],
       });
+      // props.setPopupCard({
+      //   show: true,
+      //   card: data[Number(targetCard!.dataset.index)],
+      // });
     }
   }
   return (
     <div className="container-cards" onClick={handleClick}>
-      {data.map((item, index) => (
-        <Card key={index} photo={item} index={index} />
-      ))}
+      {data.length !== 0
+        ? data.map((item, index) => <Card key={index} photo={item} index={index} />)
+        : null}
     </div>
   );
 };

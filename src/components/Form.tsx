@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import '../style/Form.css';
 import { Photo } from '../types/type';
-import { homeCards } from '../pages/HomePage';
+// import { homeCards } from '../pages/HomePage';
 import { useForm, SubmitHandler } from 'react-hook-form';
+// import { useDispatch } from 'react-redux';
+// import { addCardHome, addCardLatest } from '../store/formSlice';
+import { useAppDispatch } from '../hooks/redux';
+import { addCardHome } from '../store/slice/formSlice';
+import { addCardLatest } from '../store/slice/latestSlice';
 
 const Form = (props: {
   updateData: (arg0: string, arg1: React.ChangeEvent<HTMLInputElement> | Photo) => void;
@@ -16,6 +21,10 @@ const Form = (props: {
 
   const [сompletedForm, setCompletedForm] = useState(false);
   const [fileExists, setFileExists] = useState(false);
+
+  const dispatch = useAppDispatch();
+  const pushCardHome = (item: Photo) => dispatch(addCardHome(item));
+  const pushCardLatest = (item: Photo) => dispatch(addCardLatest(item));
 
   const onSubmit: SubmitHandler<Photo> = (data) => {
     const imageUrl = Boolean(data.image[0])
@@ -33,7 +42,9 @@ const Form = (props: {
     };
     setCompletedForm(true);
     props.updateData('all', photoCard);
-    homeCards.push(photoCard);
+    pushCardHome(photoCard);
+    pushCardLatest(photoCard);
+    // homeCards.push(photoCard);
     setTimeout(() => setCompletedForm(false), 2000);
   };
 

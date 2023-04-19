@@ -1,76 +1,146 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { IPhotosApi } from 'types/type';
+import { Photo } from '../types/type';
 import { getSearchPhotos } from '../api';
 import '../style/Search.css';
 import React, { ChangeEvent, useState, useEffect, useRef } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { updateCardSearch } from '../store/slice/searchSlice';
+import { showLoader } from '../store/slice/loaderSlice';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { saveSearchText } from '../store/slice/searchTextSlice';
+import { photoApi, useFetchAllPhotosQuery } from '../services/PhotoService';
+import { QueryApi } from '../api/QueryApi';
 
 type Search = { search: string };
 
-const Search = (props: {
-  updateData: (arg0: IPhotosApi) => void;
-  setLoader: (arg0: boolean) => void;
-}) => {
-  const [searchText, setSearchText] = useState(
-    localStorage.getItem('searchText')
-      ? JSON.parse(JSON.stringify(localStorage.getItem('searchText')))
-      : ''
-  );
-
+const Search = () => {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitSuccessful, errors },
-    reset,
+    formState: { errors },
   } = useForm<Search>();
 
-  const onSubmit: SubmitHandler<Search> = () => {
-    if (searchText.length >= 1) {
-      props.setLoader(true);
-      getSearchPhotos(searchText).then((responce) => {
-        props.updateData(responce.photos);
-        props.setLoader(false);
-      });
+  const dispatch = useAppDispatch();
+  const pushCardSearch = (item: Photo[]) => dispatch(updateCardSearch(item));
+  const isLoader = (item: boolean) => dispatch(showLoader(item));
+  const saveSearchTextGlobal = (item: string) => dispatch(saveSearchText(item));
+  const searchTextGlobal = useAppSelector((state) => state.searchText);
+
+  const [searchText, setSearchText] = useState(searchTextGlobal.text ? searchTextGlobal.text : '');
+
+  // const { data, error, isLoading } = useFetchAllPhotosQuery({
+  //   method: 'flickr.photos.search',
+  //   text: searchText,
+  //   page: '1',
+  //   perPage: '100',
+  // });
+
+  // if (data && data.stat === 'ok') {
+  //   console.log('data :>> ', data);
+  //   // pushCardSearch(
+  //   //   data.photos.photo.map((item) => {
+  //   //     return {
+  //   //       author: item.owner,
+  //   //       description: item.title,
+  //   //       date: '',
+  //   //       category: '',
+  //   //       hideAuthor: false,
+  //   //       human: '',
+  //   //       image: `https://live.staticflickr.com/${item.server}/${item.id}_${
+  //   //         item.secret
+  //   //       }_${'b'}.jpg`,
+  //   //     };
+  //   //   })
+  //   // );
+  // }
+
+  // const loadingCards = (text: string) => {
+  //   console.log('isLoading :>> ', isLoading);
+  //   // console.log('photos :>> ', photos);
+  //   console.log('error :>> ', error);
+  //   loader(true);
+  //   // const {
+  //   //   data: photos,
+  //   //   error,
+  //   //   isLoading,
+  //   // } = useFetchAllPhotosQuery({
+  //   //   method: 'flickr.photos.search',
+  //   //   text: text,
+  //   //   page: '1',
+  //   //   perPage: '100',
+  //   // });
+
+  //   // getSearchPhotos(text).then((responce) => {
+  //   //   pushCardSearch(
+  //   //     responce.photos.photo.map((item) => {
+  //   //       return {
+  //   //         author: item.owner,
+  //   //         description: item.title,
+  //   //         date: '',
+  //   //         category: '',
+  //   //         hideAuthor: false,
+  //   //         human: '',
+  //   //         image: `https://live.staticflickr.com/${item.server}/${item.id}_${
+  //   //           item.secret
+  //   //         }_${'b'}.jpg`,
+  //   //       };
+  //   //     })
+  //   //   );
+  //   //   loader(false);
+  //   // });
+  // };
+
+  useEffect(() => {
+    if (searchTextGlobal.text.length !== 0) {
+      // loadingCards(searchTextGlobal.text);
+      // Api(searchTextGlobal.text);
+      // <Api searchText={searchTextGlobal.text} />;
+      // setSearchText(searchTextGlobal.text);
+      isLoader(true);
     }
-  };
-
-  const searchRef = useRef<string>('');
-
-  function handleInput(e: ChangeEvent<HTMLInputElement>) {
-    setSearchText(e.target.value);
-  }
-
-  useEffect(() => {
-    localStorage.setItem('searchText', searchText);
-    searchRef.current = searchText;
-  }, [searchText]);
-
-  useEffect(() => {
-    return () => {
-      if (localStorage.getItem('searchText')) {
-        props.setLoader(true);
-        getSearchPhotos(JSON.parse(JSON.stringify(localStorage.getItem('searchText')))).then(
-          (responce) => {
-            props.updateData(responce.photos);
-            props.setLoader(false);
-          }
-        );
-      }
-      localStorage.setItem('searchText', searchRef.current);
-    };
   }, []);
 
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset();
+  const onSubmit: SubmitHandler<Search> = () => {
+    if (searchTextGlobal.text.length !== 0) {
+      isLoader(true);
+    } else if (searchTextGlobal.text.length === 0) {
+      isLoader(false);
+      pushCardSearch([]);
     }
-  }, [reset, isSubmitSuccessful]);
+    // Api(searchTextGlobal.text);
+    // <Api searchText={searchTextGlobal.text} />;
+    // if (saveSearchTextGlobal.length >= 1) {
+    //   // loadingCards(searchText);
+    //   setSearchText(searchTextGlobal.text);
+    //   data && data.stat === 'ok'
+    //     ? pushCardSearch(
+    //         data.photos.photo.map((item) => {
+    //           return {
+    //             author: item.owner,
+    //             description: item.title,
+    //             date: '',
+    //             category: '',
+    //             hideAuthor: false,
+    //             human: '',
+    //             image: `https://live.staticflickr.com/${item.server}/${item.id}_${
+    //               item.secret
+    //             }_${'b'}.jpg`,
+    //           };
+    //         })
+    //       )
+    //     : null;
+    // }
+  };
+
+  function handleInput(e: ChangeEvent<HTMLInputElement>) {
+    saveSearchTextGlobal(e.target.value);
+  }
 
   return (
     <form className="search-forms-container" onSubmit={handleSubmit(onSubmit)}>
       <input
         {...register('search')}
-        defaultValue={searchText}
+        defaultValue={searchTextGlobal.text}
         onChange={handleInput}
         style={{ border: errors.search ? '1px solid red' : '0px solid white' }}
         type="text"
