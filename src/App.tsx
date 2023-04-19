@@ -8,7 +8,7 @@ import { FormPage } from './pages/FormPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { Header } from './components/Header';
 
-function App() {
+const App = () => {
   return (
     <>
       <Header />
@@ -21,6 +21,6 @@ function App() {
       </Routes>
     </>
   );
-}
+};
 
-export default App;
+export { App };

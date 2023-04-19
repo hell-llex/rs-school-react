@@ -2,15 +2,16 @@ import React from 'react';
 import '../style/Popup.css';
 import { Photo } from '../types/type';
 import { Card } from './Cards';
+import { useAppDispatch } from '../hooks/redux';
+import { popupCard } from '../store/slice/popupSlice';
 
-export function Popup(props: {
-  photo: Photo;
-  setPopupCard: (arg0: { show: boolean; card: Photo | undefined }) => void;
-}) {
+const Popup = (props: { photo: Photo }) => {
+  const dispatch = useAppDispatch();
+  const closePopupCard = (item: { show: boolean; card?: Photo }) => dispatch(popupCard(item));
   function handleClick(event: React.MouseEvent<HTMLElement>) {
     const target = event.target as HTMLElement;
     if (target.classList.contains('popup') || target.closest('.icon-close')) {
-      props.setPopupCard({
+      closePopupCard({
         show: false,
         card: undefined,
       });
@@ -28,4 +29,6 @@ export function Popup(props: {
       </div>
     </div>
   );
-}
+};
+
+export { Popup };

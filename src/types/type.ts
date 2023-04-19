@@ -8,14 +8,6 @@ export interface Photo {
   image: string | File[];
 }
 
-export interface PhotoProps {
-  photo: Photo;
-}
-
-export interface PhotoList {
-  photo: Photo[];
-}
-
 export interface IPhotoApi {
   id: string;
   owner: string;
@@ -39,4 +31,50 @@ export interface IPhotosApi {
 export interface SearchResponce {
   photos: IPhotosApi;
   stat: string;
+}
+
+export interface IFormCards {
+  сards: Photo[];
+  isLoading: boolean;
+  error: string;
+}
+
+export type ILatestCards = IFormCards;
+
+export type ISearchCards = IFormCards;
+
+export interface IPopupCard {
+  show: boolean;
+  card?: Photo;
+  error: string;
+}
+
+export interface IExamplePhoto {
+  author: string;
+  description: string;
+  date: string;
+  category: string;
+  hideAuthor: boolean;
+  human: string | boolean;
+  image: string;
+  [key: string]: number | string | boolean;
+}
+
+export interface IExampleCard {
+  card?: {
+    author: string;
+    description: string;
+    date: string;
+    category: string;
+    hideAuthor: boolean;
+    human: string | boolean;
+    image: string;
+    [key: string]: number | string | boolean;
+  };
+  error: string;
+}
+
+export interface ILoader {
+  show: boolean;
+  error: string;
 }

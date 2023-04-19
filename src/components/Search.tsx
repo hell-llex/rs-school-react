@@ -1,76 +1,50 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { IPhotosApi } from 'types/type';
-import { getSearchPhotos } from '../api';
+import { Photo } from '../types/type';
 import '../style/Search.css';
-import React, { ChangeEvent, useState, useEffect, useRef } from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { updateCardSearch } from '../store/slice/searchSlice';
+import { showLoader } from '../store/slice/loaderSlice';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { saveSearchText } from '../store/slice/searchTextSlice';
 
 type Search = { search: string };
 
-export function Search(props: {
-  updateData: (arg0: IPhotosApi) => void;
-  setLoader: (arg0: boolean) => void;
-}) {
-  const [searchText, setSearchText] = useState(
-    localStorage.getItem('searchText')
-      ? JSON.parse(JSON.stringify(localStorage.getItem('searchText')))
-      : ''
-  );
-
+const Search = () => {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitSuccessful, errors },
-    reset,
+    formState: { errors },
   } = useForm<Search>();
 
+  const dispatch = useAppDispatch();
+  const pushCardSearch = (item: Photo[]) => dispatch(updateCardSearch(item));
+  const isLoader = (item: boolean) => dispatch(showLoader(item));
+  const saveSearchTextGlobal = (item: string) => dispatch(saveSearchText(item));
+  const searchTextGlobal = useAppSelector((state) => state.searchText);
+
+  useEffect(() => {
+    if (searchTextGlobal.text.length !== 0) isLoader(true);
+  }, []);
+
   const onSubmit: SubmitHandler<Search> = () => {
-    if (searchText.length >= 1) {
-      props.setLoader(true);
-      getSearchPhotos(searchText).then((responce) => {
-        props.updateData(responce.photos);
-        props.setLoader(false);
-      });
+    if (searchTextGlobal.text.length !== 0) {
+      isLoader(true);
+    } else if (searchTextGlobal.text.length === 0) {
+      isLoader(false);
+      pushCardSearch([]);
     }
   };
 
-  const searchRef = useRef<string>('');
-
   function handleInput(e: ChangeEvent<HTMLInputElement>) {
-    setSearchText(e.target.value);
+    saveSearchTextGlobal(e.target.value);
   }
-
-  useEffect(() => {
-    localStorage.setItem('searchText', searchText);
-    searchRef.current = searchText;
-  }, [searchText]);
-
-  useEffect(() => {
-    return () => {
-      if (localStorage.getItem('searchText')) {
-        props.setLoader(true);
-        getSearchPhotos(JSON.parse(JSON.stringify(localStorage.getItem('searchText')))).then(
-          (responce) => {
-            props.updateData(responce.photos);
-            props.setLoader(false);
-          }
-        );
-      }
-      localStorage.setItem('searchText', searchRef.current);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset();
-    }
-  }, [reset, isSubmitSuccessful]);
 
   return (
     <form className="search-forms-container" onSubmit={handleSubmit(onSubmit)}>
       <input
         {...register('search')}
-        defaultValue={searchText}
+        defaultValue={searchTextGlobal.text}
         onChange={handleInput}
         style={{ border: errors.search ? '1px solid red' : '0px solid white' }}
         type="text"
@@ -82,4 +56,6 @@ export function Search(props: {
       <input type="submit" value="Search" className="btn-search" />
     </form>
   );
-}
+};
+
+export { Search };

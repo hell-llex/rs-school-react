@@ -3,14 +3,10 @@ import { Popup } from '../components/Popup';
 import { test, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-// props: {
-//   photo: Photo;
-//   setPopupCard: (arg0: {
-//       show: boolean;
-//       card: Photo | undefined;
-//   }) => void;
-// }
+import { setupStore } from '../store';
+import { Provider } from 'react-redux';
 
+const store = setupStore();
 const popupCard = {
   show: true,
   card: {
@@ -27,12 +23,9 @@ const popupCard = {
 describe('Search component', () => {
   test('should render correctly', () => {
     render(
-      <Popup
-        photo={popupCard.card!}
-        setPopupCard={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-      />
+      <Provider store={store}>
+        <Popup photo={popupCard.card!} />
+      </Provider>
     );
 
     const author = screen.getByRole('author') as HTMLInputElement;

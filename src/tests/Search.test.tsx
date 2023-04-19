@@ -3,10 +3,17 @@ import { Search } from '../components/Search';
 import { test, expect } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import { Provider } from 'react-redux';
+import { setupStore } from '../store';
 
+const store = setupStore();
 describe('Search component', () => {
   test('should render correctly', () => {
-    render(<Search updateData={function (): void {}} setLoader={function (): void {}} />);
+    render(
+      <Provider store={store}>
+        <Search />
+      </Provider>
+    );
     const inputField = screen.getByRole('search');
     const searchButton = screen.getByRole('button', { name: 'Search' });
     expect(inputField).toBeInTheDocument();
@@ -14,7 +21,11 @@ describe('Search component', () => {
   });
 
   test('should update search text on input change', () => {
-    render(<Search updateData={function (): void {}} setLoader={function (): void {}} />);
+    render(
+      <Provider store={store}>
+        <Search />
+      </Provider>
+    );
     const searchInput = screen.getByRole('search') as HTMLInputElement;
 
     fireEvent.change(searchInput, { target: { value: 'test' } });
@@ -22,36 +33,14 @@ describe('Search component', () => {
   });
 
   test('should update state on input change', () => {
-    render(<Search updateData={function (): void {}} setLoader={function (): void {}} />);
-    const searchInput = screen.getByRole('search') as HTMLInputElement;
-
-    fireEvent.change(searchInput, { target: { value: 'test' } });
-    expect(searchInput).toHaveValue('test');
-  });
-
-  test('should save search text to local storage on unmount', () => {
-    render(<Search updateData={function (): void {}} setLoader={function (): void {}} />);
-    const searchInput = screen.getByRole('search') as HTMLInputElement;
-
-    fireEvent.change(searchInput, { target: { value: 'test' } });
-    expect(searchInput).toHaveValue('test');
-
-    const { unmount } = render(
-      <Search updateData={function (): void {}} setLoader={function (): void {}} />
+    render(
+      <Provider store={store}>
+        <Search />
+      </Provider>
     );
-    unmount();
-
-    expect(JSON.parse(JSON.stringify(localStorage.getItem('searchText')))).toBe('test');
-  });
-
-  test('should load search text from local storage on mount', () => {
-    render(<Search updateData={function (): void {}} setLoader={function (): void {}} />);
     const searchInput = screen.getByRole('search') as HTMLInputElement;
 
-    fireEvent.change(searchInput, {
-      target: { value: JSON.parse(JSON.stringify(localStorage.getItem('searchText'))) },
-    });
-
+    fireEvent.change(searchInput, { target: { value: 'test' } });
     expect(searchInput).toHaveValue('test');
   });
 });

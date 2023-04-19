@@ -1,68 +1,40 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../style/HomePage.css';
 import data from '../photos.json';
 import { Search } from '../components/Search';
 import { Cards } from '../components/Cards';
-import { IPhotosApi, Photo } from 'types/type';
-import { Loader } from '../components/Loader';
+import { Photo } from '../types/type';
 import { Popup } from '../components/Popup';
+import { useAppSelector } from '../hooks/redux';
+import { QueryApi } from '../api/QueryApi';
 
 export const homeCards: Photo[] = data;
 
 const HomePage = () => {
-  const [searchCards, setSearchCards] = useState<Photo[]>([]);
-  const [loader, setLoader] = useState(false);
-  const [popupCard, setPopupCard] = useState<{ show: boolean; card?: Photo }>({
-    show: false,
-    card: {
-      author: '',
-      description: '',
-      date: '',
-      category: '',
-      hideAuthor: false,
-      human: '',
-      image: '',
-    },
-  });
-  const updateData = (dataSearch: IPhotosApi) => {
-    setSearchCards(
-      dataSearch.photo.map((item) => {
-        return {
-          author: item.owner,
-          description: item.title,
-          date: '',
-          category: '',
-          hideAuthor: false,
-          human: '',
-          image: `https://live.staticflickr.com/${item.server}/${item.id}_${
-            item.secret
-          }_${'b'}.jpg`,
-        };
-      })
-    );
-  };
+  const popupCard = useAppSelector((state) => state.popupCard);
+  const isLoader = useAppSelector((state) => state.loader);
+  const homeFormCards = useAppSelector((state) => state.formCards!.сards);
+  const searchCards = useAppSelector((state) => state.searchCard.сards);
 
   return (
     <div className="home-page router__page">
-      {popupCard.show && popupCard.card ? (
-        <Popup photo={popupCard.card!} setPopupCard={setPopupCard} />
-      ) : null}
-      <Search updateData={updateData} setLoader={setLoader} />
+      {popupCard.show && popupCard.card ? <Popup photo={popupCard.card} /> : null}
+      <Search />
       <div className="search-cards-container">
         <h2 className="cards-container_title">Search Cards</h2>
-        {searchCards.length === 0 && !loader ? (
+        {searchCards.length === 0 && !isLoader.show ? (
           <>
             <h3>Either you haven&apos;t entered a text query yet or nothing is found...</h3>
           </>
-        ) : loader ? (
-          <Loader />
+        ) : isLoader.show ? (
+          <QueryApi />
         ) : (
-          <Cards photo={searchCards} setPopupCard={setPopupCard} />
+          <Cards photo={searchCards} />
         )}
       </div>
       <div className="your-cards-container">
         <h2 className="cards-container_title">Your Cards</h2>
-        <Cards photo={homeCards} setPopupCard={setPopupCard} />
+        <Cards photo={homeFormCards} />
       </div>
     </div>
   );
