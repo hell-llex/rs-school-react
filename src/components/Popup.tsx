@@ -2,8 +2,6 @@ import React from 'react';
 import '../style/Popup.css';
 import { Photo } from '../types/type';
 import { Card } from './Cards';
-// import { useDispatch } from 'react-redux';
-// import { popupCard } from '../store/formSlice';
 import { useAppDispatch } from '../hooks/redux';
 import { popupCard } from '../store/slice/popupSlice';
 
@@ -17,9 +15,6 @@ const Popup = (props: { photo: Photo }) => {
         show: false,
         card: undefined,
       });
-      // props.setPopupCard({
-      //
-      // });
     }
   }
   return (

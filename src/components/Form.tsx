@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import '../style/Form.css';
-import { Photo } from '../types/type';
-// import { homeCards } from '../pages/HomePage';
+import { IExamplePhoto, Photo } from '../types/type';
 import { useForm, SubmitHandler } from 'react-hook-form';
-// import { useDispatch } from 'react-redux';
-// import { addCardHome, addCardLatest } from '../store/formSlice';
 import { useAppDispatch } from '../hooks/redux';
 import { addCardHome } from '../store/slice/formSlice';
 import { addCardLatest } from '../store/slice/latestSlice';
+import { exampleCard } from '../store/slice/exampleCardSlice';
 
-const Form = (props: {
-  updateData: (arg0: string, arg1: React.ChangeEvent<HTMLInputElement> | Photo) => void;
-}) => {
+const Form = () => {
   const {
     register,
     handleSubmit,
@@ -19,12 +15,23 @@ const Form = (props: {
     reset,
   } = useForm<Photo>();
 
+  const baseCard = {
+    author: ' ',
+    description: ' ',
+    date: ' ',
+    category: 'Landscape',
+    hideAuthor: false,
+    human: '0',
+    image: '',
+  };
   const [сompletedForm, setCompletedForm] = useState(false);
   const [fileExists, setFileExists] = useState(false);
+  const [exampleCardState, setExampleCardState] = useState<IExamplePhoto>(baseCard);
 
   const dispatch = useAppDispatch();
   const pushCardHome = (item: Photo) => dispatch(addCardHome(item));
   const pushCardLatest = (item: Photo) => dispatch(addCardLatest(item));
+  const createExamleCard = (item: IExamplePhoto) => dispatch(exampleCard(item));
 
   const onSubmit: SubmitHandler<Photo> = (data) => {
     const imageUrl = Boolean(data.image[0])
@@ -41,10 +48,12 @@ const Form = (props: {
       image: imageUrl,
     };
     setCompletedForm(true);
-    props.updateData('all', photoCard);
+
+    createExamleCard(baseCard);
+    setExampleCardState(baseCard);
+
     pushCardHome(photoCard);
     pushCardLatest(photoCard);
-    // homeCards.push(photoCard);
     setTimeout(() => setCompletedForm(false), 2000);
   };
 
@@ -56,7 +65,18 @@ const Form = (props: {
   }, [reset, isSubmitSuccessful]);
 
   function updateCard(event: React.ChangeEvent<HTMLInputElement>) {
-    props.updateData('one', event);
+    const target = event.target;
+    const key = target.name;
+
+    const value =
+      target.type === 'checkbox'
+        ? target.checked
+        : target.type === 'file'
+        ? String(URL.createObjectURL(target.files![0] as File))
+        : target.value;
+    const card = { ...exampleCardState, [key]: value };
+    setExampleCardState(card);
+    createExamleCard(card);
   }
 
   return (

@@ -11,7 +11,6 @@ export const photoApi = createApi({
     fetchAllPhotos: build.query<SearchResponce, queryParams>({
       query: (args) => {
         const { method, text, page, perPage } = args;
-        console.log('args: ', args);
         return {
           url: `?method=${method}&api_key=${api_key}&text=${text}&per_page=${perPage}&page=${page}&format=json&nojsoncallback=1`,
         };

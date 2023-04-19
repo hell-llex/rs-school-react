@@ -1,12 +1,10 @@
 import '../style/Cards.css';
 import React from 'react';
-import { Photo } from '../types/type';
-// import { useDispatch } from 'react-redux';
-// import { popupCard } from '../store/formSlice';
+import { IExamplePhoto, Photo } from '../types/type';
 import { useAppDispatch } from '../hooks/redux';
 import { popupCard } from '../store/slice/popupSlice';
 
-const Card = (props: { photo: Photo; index: number }) => {
+const Card = (props: { photo: Photo | IExamplePhoto; index: number }) => {
   const item = props.photo;
   return (
     <div className="card" data-index={props.index}>
@@ -64,10 +62,6 @@ const Cards = (props: { photo: Photo[] }) => {
         show: true,
         card: data[Number(targetCard!.dataset.index)],
       });
-      // props.setPopupCard({
-      //   show: true,
-      //   card: data[Number(targetCard!.dataset.index)],
-      // });
     }
   }
   return (

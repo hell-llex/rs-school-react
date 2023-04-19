@@ -48,13 +48,33 @@ export interface IPopupCard {
   card?: Photo;
   error: string;
 }
-export interface ILoader {
-  show: boolean;
+
+export interface IExamplePhoto {
+  author: string;
+  description: string;
+  date: string;
+  category: string;
+  hideAuthor: boolean;
+  human: string | boolean;
+  image: string;
+  [key: string]: number | string | boolean;
+}
+
+export interface IExampleCard {
+  card?: {
+    author: string;
+    description: string;
+    date: string;
+    category: string;
+    hideAuthor: boolean;
+    human: string | boolean;
+    image: string;
+    [key: string]: number | string | boolean;
+  };
   error: string;
 }
 
-export interface MyState {
-  formCards?: IFormCards;
-  latestCards?: ILatestCards;
-  popupCard?: IPopupCard;
+export interface ILoader {
+  show: boolean;
+  error: string;
 }
