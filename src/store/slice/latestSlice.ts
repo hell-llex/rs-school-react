@@ -12,7 +12,11 @@ export const latestCardsSlice = createSlice({
   initialState,
   reducers: {
     addCardLatest(state, action: { payload: Photo; type: string }) {
-      state.сards.unshift(action.payload);
+      if (state.сards.length <= 10) {
+        state.сards.unshift(action.payload);
+      } else {
+        state.сards = [action.payload];
+      }
     },
   },
 });

@@ -6,6 +6,7 @@ import { loaderReducer } from './slice/loaderSlice';
 import { searchCardReducer } from './slice/searchSlice';
 import { searchTextReducer } from './slice/searchTextSlice';
 import { photoApi } from '../services/PhotoService';
+import { exampleCardReducer } from './slice/exampleCardSlice';
 
 const rootReducer = combineReducers({
   formCards: homeCardsReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   searchCard: searchCardReducer,
   loader: loaderReducer,
   searchText: searchTextReducer,
+  exampleCard: exampleCardReducer,
   [photoApi.reducerPath]: photoApi.reducer,
 });
 
