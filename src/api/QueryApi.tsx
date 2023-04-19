@@ -17,7 +17,7 @@ const QueryApi = () => {
     method: 'flickr.photos.search',
     text: searchText.text,
     page: '1',
-    perPage: '10',
+    perPage: '30',
   });
 
   useEffect(() => {
