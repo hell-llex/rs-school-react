@@ -4,7 +4,10 @@ import { setupServer } from 'msw/node';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { HomePage } from '../pages/HomePage';
+import { setupStore } from '../store';
+import { Provider } from 'react-redux';
 
+const store = setupStore();
 const URL =
   'https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=31fa894fb022e80a7ea363cb781d1692&text=bird&per_page=10&page=1&format=json&nojsoncallback=1';
 
@@ -139,7 +142,11 @@ const server = setupServer(
 beforeAll(() => server.listen());
 
 test('loads and displays greeting', async () => {
-  render(<HomePage />);
+  render(
+    <Provider store={store}>
+      <HomePage />
+    </Provider>
+  );
 
   const searchInput = screen.getByRole('search') as HTMLInputElement;
   const searchButton = screen.getByRole('button', { name: 'Search' });
