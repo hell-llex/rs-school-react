@@ -1,8 +1,6 @@
 import './style/App.css';
-import './style/main.css';
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { FormPage } from './pages/FormPage';
