@@ -29,19 +29,19 @@ const Card = (props: { photo: Photo | IExamplePhoto; index: number }) => {
           <b>Description: </b>
           {item.description}
         </div>
-        <div className="info__date" style={{ display: item.date ? '' : 'none' }} role="date">
+        <div className="info__date" style={{ display: item.date ? ' ' : 'none' }} role="date">
           <b>Date: </b>
           {item.date.split('-').reverse().join('.')}
         </div>
         <div
           className="info__category"
-          style={{ display: item.category ? '' : 'none' }}
+          style={{ display: item.category ? ' ' : 'none' }}
           role="category"
         >
           <b>Category: </b>
           {item.category}
         </div>
-        <div className="info__human" style={{ display: item.human ? '' : 'none' }}>
+        <div className="info__human" style={{ display: item.human ? ' ' : 'none' }}>
           <b>Person in the photo: </b>
           {item.human === '0' ? 'No' : 'Yes'}
         </div>

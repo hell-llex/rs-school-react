@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { setupStore } from './store/index';
 
 const store = setupStore();
-
+// ReactDOM.hydrate(<App />, document.getElementById("root"));
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
     <Provider store={store}>

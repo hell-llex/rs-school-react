@@ -10,6 +10,9 @@
     "vite.config.ts",
     "src/entry-server.tsx",
     "src/entry-client.tsx",
-    "src/vite-env.d.ts"
+    "src/vite-env.d.ts",
+    "src/App.tsx",
+    "src/*",
+    "src/**/*"
   ]
 }
