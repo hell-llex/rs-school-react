@@ -11,6 +11,8 @@ describe('Check About page', () => {
   it('loader', () => {
     cy.get('div.about-page.router__page').within(() => {
       cy.get('div.loader-container');
+      cy.get('svg');
+      cy.get('g').should('have.class', 'spiner');
     });
   });
 });
